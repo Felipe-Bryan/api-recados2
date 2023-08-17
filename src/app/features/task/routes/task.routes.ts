@@ -2,7 +2,6 @@ import { Router } from 'express';
 import { TaskController } from '../controllers/task.controller';
 import { TaskMiddleware } from '../validators/task.middleware';
 import { UserMiddleware } from '../../user/validators/user.middleware';
-import { LoginValidator } from '../../authentication/validators/login.middleware';
 
 export const taskRoutes = () => {
   const app = Router({
