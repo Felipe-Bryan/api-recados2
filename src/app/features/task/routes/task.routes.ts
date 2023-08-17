@@ -1,0 +1,23 @@
+import { Router } from 'express';
+import { TaskController } from '../controllers/task.controller';
+import { TaskMiddleware } from '../validators/task.middleware';
+import { UserMiddleware } from '../../user/validators/user.middleware';
+import { LoginValidator } from '../../authentication/validators/login.middleware';
+
+export const taskRoutes = () => {
+  const app = Router({
+    mergeParams: true,
+  });
+
+  app.post(
+    '/',
+    [LoginValidator.checkToken, TaskMiddleware.validateFieldsCreate, TaskMiddleware.validateLengthFields],
+    new TaskController().create
+  );
+  app.get('/', [UserMiddleware.validateUser], new TaskController().listUserTasks);
+  app.get('/:id', [UserMiddleware.validateUser], new TaskController().getById);
+  app.put('/:id', [UserMiddleware.validateUser], new TaskController().update);
+  app.delete('/:id', [UserMiddleware.validateUser], new TaskController().delete);
+
+  return app;
+};
