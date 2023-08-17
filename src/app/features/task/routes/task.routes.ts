@@ -11,7 +11,7 @@ export const taskRoutes = () => {
 
   app.post(
     '/',
-    [LoginValidator.checkToken, TaskMiddleware.validateFieldsCreate, TaskMiddleware.validateLengthFields],
+    [TaskMiddleware.validateFieldsCreate, TaskMiddleware.validateLengthFields],
     new TaskController().create
   );
   app.get('/', [UserMiddleware.validateUser], new TaskController().listUserTasks);
