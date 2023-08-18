@@ -7,9 +7,7 @@ import { ListUsersUseCase } from './list-users.usecase';
 
 export class DeleteUserUseCase {
   public async execute(id: string): Promise<Result> {
-    const deletedTasks = await new TaskRepository().deleteTasks(id);
-
-    console.log(deletedTasks);
+    await new TaskRepository().deleteTasks(id);
 
     const deleted = await new UserRepository().delete(id);
 
