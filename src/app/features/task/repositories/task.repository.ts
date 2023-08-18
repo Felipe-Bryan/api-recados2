@@ -57,6 +57,14 @@ export class TaskRepository {
     return result.affected ?? 0;
   }
 
+  public async deleteTasks(userId: string) {
+    const result = await this.connection.delete({
+      userId,
+    });
+
+    return result.affected ?? 0;
+  }
+
   public toModel(entity: TaskEntity) {
     return Task.create(entity);
   }

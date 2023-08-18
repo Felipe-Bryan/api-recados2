@@ -1,11 +1,16 @@
 import { Result } from '../../../shared/contracts/result.contract';
 import { CacheRepository } from '../../../shared/database/repositories/cache.repository';
 import { Return } from '../../../shared/util/return.adapter';
+import { TaskRepository } from '../../task/repositories/task.repository';
 import { UserRepository } from '../repositories/user.repository';
 import { ListUsersUseCase } from './list-users.usecase';
 
 export class DeleteUserUseCase {
   public async execute(id: string): Promise<Result> {
+    const deletedTasks = await new TaskRepository().deleteTasks(id);
+
+    console.log(deletedTasks);
+
     const deleted = await new UserRepository().delete(id);
 
     if (deleted == 0) {
