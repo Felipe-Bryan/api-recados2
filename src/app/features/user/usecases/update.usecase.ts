@@ -34,6 +34,12 @@ export class UpdateUserUseCase {
     }
 
     if (params.email) {
+      const findEmail = await new UserRepository().getByEmail(params.email);
+
+      if (findEmail) {
+        return Return.alreadyExists();
+      }
+
       newUser.email = params.email;
     }
 

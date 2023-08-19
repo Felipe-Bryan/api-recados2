@@ -34,4 +34,12 @@ export class Return {
       code: 201,
     };
   }
+
+  public static alreadyExists() {
+    return {
+      ok: false,
+      msg: 'Email already exists',
+      code: 400,
+    };
+  }
 }

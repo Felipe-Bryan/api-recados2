@@ -14,6 +14,12 @@ interface CreateUserParams {
 
 export class CreateUserUseCase {
   public async execute(params: CreateUserParams): Promise<Result> {
+    const findEmail = await new UserRepository().getByEmail(params.email);
+
+    if (findEmail) {
+      return Return.alreadyExists();
+    }
+
     const user = new User(params.name, params.email, params.password);
 
     const cryptoPass = new JwtService().createToken(params.password);
