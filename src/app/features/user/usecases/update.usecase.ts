@@ -1,5 +1,6 @@
 import { Result } from '../../../shared/contracts/result.contract';
 import { CacheRepository } from '../../../shared/database/repositories/cache.repository';
+import { JwtService } from '../../../shared/services/jwt.service';
 import { Return } from '../../../shared/util/return.adapter';
 import { UserRepository } from '../repositories/user.repository';
 import { GetUserByIdUseCase } from './get-user-by-id.usecase';
@@ -27,7 +28,9 @@ export class UpdateUserUseCase {
     }
 
     if (params.password) {
-      newUser.password = params.password;
+      const cryptoPass = new JwtService().createToken(params.password);
+
+      newUser.password = cryptoPass;
     }
 
     if (params.email) {
