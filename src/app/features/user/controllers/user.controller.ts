@@ -51,7 +51,6 @@ export class UserController {
       const { name, password, email } = req.body;
 
       const result = await new UpdateUserUseCase().execute({ id, name, password, email });
-      result.msg = 'User updated';
 
       return ApiResponse.done(res, result);
     } catch (error) {

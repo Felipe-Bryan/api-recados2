@@ -44,6 +44,7 @@ export class UpdateUserUseCase {
     }
 
     user.data = newUser;
+    user.msg = 'User updated';
 
     await new UserRepository().update(user.data);
 
