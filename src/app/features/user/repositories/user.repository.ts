@@ -46,12 +46,6 @@ export class UserRepository {
     return UserRepository.toModel(result);
   }
 
-  // public async exist(id: string) {
-  //   const result = await this.connection.exist({ where: { id } });
-
-  //   return result;
-  // }
-
   public async update(user: User) {
     await this.connection.update(
       {
