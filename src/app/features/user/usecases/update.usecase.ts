@@ -1,3 +1,4 @@
+import { User } from '../../../models/user.model';
 import { Result } from '../../../shared/contracts/result.contract';
 import { CacheRepository } from '../../../shared/database/repositories/cache.repository';
 import { JwtService } from '../../../shared/services/jwt.service';
@@ -17,11 +18,11 @@ export class UpdateUserUseCase {
   public async execute(params: UpdateUserParams): Promise<Result> {
     const user = await new GetUserByIdUseCase().execute(params.id);
 
-    if (!user) {
+    if (!user.data) {
       return Return.notFound('User');
     }
 
-    let newUser = user.data;
+    let newUser: User = user.data;
 
     if (params.name) {
       newUser.name = params.name;

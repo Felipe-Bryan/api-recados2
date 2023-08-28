@@ -1,6 +1,6 @@
-@HOST = https://api-taskvault.onrender.com
+@HOST = http://localhost:3333
 
-@USERID = 828cbcad-d760-4a50-a0ad-f4cf216df893
+@USERID = 828cbcad-d760-4a50-a0ad-f4cf216df89
 
 PUT {{HOST}}/user/{{USERID}} HTTP/1.1
 Content-Type: application/json
